@@ -1,53 +1,69 @@
 import { useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity } from "react-native";
-import { Background, Buttons, Container } from "./styles";
+import { Background, Buttons, Container, ContentData, DataContainer, TextGeneric, TextTitle } from "./styles";
 import { Input } from "../input";
 import { useTask } from "@/hooks/task";
 import { ITasks } from "@/types/ITask";
 import { Calendars } from "../calendar";
 import { DateData } from "react-native-calendars";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import React from "react";
+import { theme } from "@/styles/theme";
 
-export function AddTaskModal({ visible, onClose }: AddTaskModalProps) {
-    const { addTask } = useTask();
+interface AddTaskModalProps {
+    titleModal: string;
+    visible: boolean;
+    onClose: () => void;
+    type: "Add" | "Edit";
+    task?: ITasks | null;
+}
+
+export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTaskModalProps) {
+    const { addTask, editTask } = useTask();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [calendarVisible, setCalendarVisible] = useState(false);
     const [day, setDay] = useState<DateData | null>(null);
 
-
+    useEffect(() => {
+        if (type === "Edit" && task) {
+            setTitle(task.title ?? "");
+            setDescription(task.description ?? "");
+            setDay(task.day ?? null);
+        } else {
+            setTitle("");
+            setDescription("");
+            setDay(null);
+        }
+    }, [visible, task]);
 
     const handleAddTask = () => {
-        if (!title.trim() || !description.trim()) {
-            return;
-        }
-    
+        if (!title.trim() || !description.trim()) return;
+
         const newTask: ITasks = {
             id: Date.now(),
             title,
             description,
             status: "Pendente",
-            day: day ?? undefined, 
+            day: day ?? undefined,
         };
-    
+
         addTask(newTask);
-        setTitle("");
-        setDescription("");
-        setDay(null);
         onClose();
     };
 
+    const handleEditTask = () => {
+        if (!task || task.id == null) return;
 
-    useEffect(() => {
-        if (!visible) {
-            setDay(null);
-        }
-    }, [visible]);
+        editTask(task.id, title, description, day);
+        onClose();
+    };
 
     return (
         <Modal animationType="fade" transparent={true} visible={visible} onRequestClose={onClose}>
             <Background>
                 <Container>
-                    <Text style={{ fontSize: 18, fontWeight: "bold" }}>Adicionar Nova Tarefa</Text>
+                    <TextTitle>{titleModal}</TextTitle>
 
                     <Input>
                         <Input.Field
@@ -65,10 +81,23 @@ export function AddTaskModal({ visible, onClose }: AddTaskModalProps) {
                         />
                     </Input>
 
-                    <View>
+                    <DataContainer>
                         <TouchableOpacity onPress={() => setCalendarVisible(true)}>
-                            <Text>Selecionar Data: {day ? `${day.day}/${day.month}/${day.year}` : ""}</Text>
-
+                            <View>
+                                {day ? (
+                                    <ContentData>
+                                        <TextGeneric>
+                                            Data Selecionada: {`${day.day}/${day.month}/${day.year}`}
+                                        </TextGeneric>
+                                        <AntDesign name="calendar" size={24} color={theme.colors.gray_800} />
+                                    </ContentData>
+                                ) : (
+                                    <ContentData>
+                                        <TextGeneric>Selecione uma data :</TextGeneric>
+                                        <AntDesign name="calendar" size={24} color={theme.colors.gray_800} />
+                                    </ContentData>
+                                )}
+                            </View>
                         </TouchableOpacity>
 
                         <Calendars
@@ -77,7 +106,7 @@ export function AddTaskModal({ visible, onClose }: AddTaskModalProps) {
                             day={day}
                             onClose={() => setCalendarVisible(false)}
                         />
-                    </View>
+                    </DataContainer>
 
                     <Buttons>
                         <TouchableOpacity onPress={onClose} style={{
@@ -89,13 +118,16 @@ export function AddTaskModal({ visible, onClose }: AddTaskModalProps) {
                             <Text style={{ color: "white" }}>Fechar</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={handleAddTask} style={{
-                            marginTop: 20,
-                            backgroundColor: "green",
-                            padding: 10,
-                            borderRadius: 5,
-                        }}>
-                            <Text style={{ color: "white" }}>Adicionar</Text>
+                        <TouchableOpacity
+                            onPress={type === "Add" ? handleAddTask : handleEditTask}
+                            style={{
+                                marginTop: 20,
+                                backgroundColor: type === "Add" ? "green" : "blue",
+                                padding: 10,
+                                borderRadius: 5,
+                            }}
+                        >
+                            <Text style={{ color: "white" }}>{type === "Add" ? "Adicionar" : "Salvar"}</Text>
                         </TouchableOpacity>
                     </Buttons>
                 </Container>

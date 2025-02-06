@@ -6,6 +6,6 @@ export interface ITasks{
     title?: string;
     description?: string;
     status?: "Pendente" | "Completado" | "Incompleto";
-    day?: DateData;
+    day?: DateData | null ;
     onNewTaskPress?: () => void;
 }

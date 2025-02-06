@@ -62,7 +62,7 @@ export default function Index() {
                     <Task id={null} isNew onNewTaskPress={() => setModalVisible(true)} />
                 }
             />
-            <AddTaskModal visible={modalVisible} onClose={() => setModalVisible(false)} />
+            <AddTaskModal titleModal={"Adicionar Nova Tarefa"} type={"Add"} visible={modalVisible} onClose={() => setModalVisible(false)} />
         </Container>
     );
 }

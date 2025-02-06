@@ -1,6 +1,7 @@
 import { ITasks } from "@/types/ITask";
 import { ITaskContext } from "@/types/ITaskContext";
 import { createContext, ReactNode, useContext, useState } from "react";
+import { DateData } from "react-native-calendars";
 
 
 
@@ -18,7 +19,7 @@ export function TaskProvider({ children }: ITaskProviderProps) {
     ]);
 
     async function addTask({ id, title, description, status, day }: ITasks) {
-        const newTask: ITasks = { id, title, description, status, day};
+        const newTask: ITasks = { id, title, description, status, day };
         setTask([...task, newTask]);
         // Salvar no storage
         //...
@@ -38,9 +39,9 @@ export function TaskProvider({ children }: ITaskProviderProps) {
         setTask(updatedTasks);
     }
 
-    async function editTask(taskId: number, newTitle: string, newDescription: string) {
+    async function editTask(taskId: number, newTitle: string, newDescription: string, newday: DateData | null) {
         const updatedTasks = task.map(t =>
-            t.id === taskId ? { ...t, title: newTitle, description: newDescription } : t
+            t.id === taskId ? { ...t, title: newTitle, description: newDescription, day: newday } : t
         );
         setTask(updatedTasks);
     }

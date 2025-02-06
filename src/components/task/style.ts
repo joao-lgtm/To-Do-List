@@ -3,10 +3,10 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     display: flex;
     flex-direction: column;
-    border: 1px solid white;
+    border: 1px solid ${({ theme } : any) => theme.colors.gray};
     border-radius: 6px;
     gap: 15px;    
-    background-color:  ${({ theme } : any) => theme.colors.gray};
+    background-color:  ${({ theme } : any) => theme.colors.black_900};
     padding: 12px;
     margin-bottom: 15px;
 `;
