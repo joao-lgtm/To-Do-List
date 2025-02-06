@@ -1,11 +1,7 @@
 import { ITasks } from "@/types/ITask";
+import { ITaskContext } from "@/types/ITaskContext";
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface ITaskContext {
-    task: ITasks[];
-    addTask: (task: ITasks) => void;
-    updateTaskStatus: (taskId: number, newStatus: "Pendente" | "Completado" | "Incompleto") => void;
-}
 
 
 export const TaskContext = createContext({} as ITaskContext);
@@ -21,24 +17,36 @@ export function TaskProvider({ children }: ITaskProviderProps) {
         { id: 2, title: "Estudar React Native", description: "Finalizar módulo 3 do curso", status: "Pendente" }
     ]);
 
-    async function addTask({ id, title, description, status }: ITasks) {
-        const newTask: ITasks = { id, title, description, status };
+    async function addTask({ id, title, description, status, day }: ITasks) {
+        const newTask: ITasks = { id, title, description, status, day};
         setTask([...task, newTask]);
         // Salvar no storage
         //...
     }
 
-
     async function updateTaskStatus(taskId: number, newStatus: "Pendente" | "Completado" | "Incompleto") {
         const updatedTasks = task.map(t =>
             t.id === taskId ? { ...t, status: newStatus } : t
         );
-    
+
+        setTask(updatedTasks);
+    }
+
+
+    async function removeTask(taskId: number) {
+        const updatedTasks = task.filter(t => t.id !== taskId);
+        setTask(updatedTasks);
+    }
+
+    async function editTask(taskId: number, newTitle: string, newDescription: string) {
+        const updatedTasks = task.map(t =>
+            t.id === taskId ? { ...t, title: newTitle, description: newDescription } : t
+        );
         setTask(updatedTasks);
     }
 
     return (
-        <TaskContext.Provider value={{ task, addTask ,updateTaskStatus}}>
+        <TaskContext.Provider value={{ task, addTask, updateTaskStatus, removeTask, editTask }}>
             {children}
         </TaskContext.Provider>
     )

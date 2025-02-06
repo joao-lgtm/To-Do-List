@@ -1,5 +1,4 @@
-import { IStatus } from "./IStatus";
-
+import { DateData } from "react-native-calendars";
 
 export interface ITasks{
     id: number | null;
@@ -7,5 +6,6 @@ export interface ITasks{
     title?: string;
     description?: string;
     status?: "Pendente" | "Completado" | "Incompleto";
+    day?: DateData;
     onNewTaskPress?: () => void;
 }

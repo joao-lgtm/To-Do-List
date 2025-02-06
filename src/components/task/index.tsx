@@ -5,9 +5,10 @@ import { AntDesign, Entypo, Octicons } from "@expo/vector-icons";
 import React from "react";
 import { StatusBall } from "../statusBall";
 import { useTask } from "@/hooks/task";
+import { DateData } from "react-native-calendars";
 
-export function Task({ id, isNew = false, title, description, status = "Incompleto", onNewTaskPress }: ITasks) {
-    const { updateTaskStatus } = useTask();
+export function Task({ id, isNew = false, title, description, status = "Incompleto", day, onNewTaskPress }: ITasks) {
+    const { updateTaskStatus, removeTask } = useTask();
 
     async function handleUpdateStatus(newStatus: "Pendente" | "Completado" | "Incompleto") {
         if (id === null) {
@@ -16,15 +17,27 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
         updateTaskStatus(id, newStatus);
     };
 
-    const formatDate = (date: Date) => date.toLocaleDateString("pt-BR");
+    async function handleRemoveTask() {
+        if (id === null) {
+            return;
+        }
+        removeTask(id);
+    }
 
+    const formatDate = (dates: DateData | undefined) => {
+        if (!dates) return "Nenhuma data selecionada";
+        const { day, month, year } = dates;
+        const formattedMonth = month < 10 ? `0${month}` : month;
+        const formattedDay = day < 10 ? `0${day}` : day; 
+        return `${formattedDay}/${formattedMonth}/${year}`;
+    };
     return (
         <Container>
             {isNew === false ? (
                 <>
                     <Content>
                         <Description>
-                            <TitleText>{title} {id}</TitleText>
+                            <TitleText>{title}</TitleText>
                             <DescriptionText>{description}</DescriptionText>
                         </Description>
                         <Buttons>
@@ -33,7 +46,7 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
                                     <AntDesign name="check" size={20} color="green" />
                                 </ConfirmButton>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handleUpdateStatus("Incompleto")}>
+                            <TouchableOpacity onPress={() => handleRemoveTask()}>
                                 <ConfirmButton>
                                     <AntDesign name="close" size={20} color="red" />
                                 </ConfirmButton>
@@ -49,8 +62,7 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
                         <Status>
                             <DescriptionText>Status: {status} <StatusBall status={status} /></DescriptionText>
                         </Status>
-                        <DescriptionText>Data de criação: {formatDate(new Date())}</DescriptionText>
-                        <DescriptionText>Data de Expiração: {formatDate(new Date())}</DescriptionText>
+                        <DescriptionText>Data de Expiração: {formatDate(day)}</DescriptionText>
                     </View>
                 </>
             ) : (

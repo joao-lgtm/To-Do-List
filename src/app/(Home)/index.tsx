@@ -1,5 +1,5 @@
-import { useState } from "react";
-import {  FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { Button, FlatList, Text, View } from "react-native";
 import { Task } from "@/components/task";
 import { AddTaskModal } from "@/components/modal";
 import { useTask } from "@/hooks/task";
@@ -17,18 +17,21 @@ export default function Index() {
         return true;
     });
 
-   const totalTodos = task.length;
-   const totalPendente = task.filter(t => t.status === "Pendente").length;
-   const totalCompletado = task.filter(t => t.status === "Completado").length;
+    const totalTodos = task.length;
+    const totalPendente = task.filter(t => t.status === "Pendente").length;
+    const totalCompletado = task.filter(t => t.status === "Completado").length;
 
-   const tabs = [
-       { name: "Todos", total: totalTodos },
-       { name: "Pendente", total: totalPendente },
-       { name: "Completos", total: totalCompletado },
-   ];
-   
+    const tabs = [
+        { name: "Todos", total: totalTodos },
+        { name: "Pendente", total: totalPendente },
+        { name: "Completos", total: totalCompletado },
+    ];
+
+
+
     return (
         <Container>
+            <Text>Todo List</Text>
             <TabsContainer>
                 {tabs.map(({ name, total }) => (
                     <TabButton
@@ -47,15 +50,21 @@ export default function Index() {
                 data={filteredTasks}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
-                    <Task id={item.id} title={item.title} description={item.description} status={item.status} />
+                    <Task
+                        id={item.id}
+                        title={item.title}
+                        description={item.description}
+                        status={item.status}
+                        day={item.day}
+                    />
                 )}
                 ListFooterComponent={
                     <Task id={null} isNew onNewTaskPress={() => setModalVisible(true)} />
                 }
             />
-
             <AddTaskModal visible={modalVisible} onClose={() => setModalVisible(false)} />
         </Container>
     );
 }
 
+ 
