@@ -1,12 +1,12 @@
 import { Text, View, TouchableOpacity } from "react-native";
-import { AddTask, Buttons, ConfirmButton, Container, Content, Description, DescriptionText, Status, TitleText } from "./style";
+import { AddTask, Buttons, ConfirmButton, Container, Content, Description, StatusText, Status, TitleText, DescriptionText, Info } from "./style";
 import { ITasks } from "@/types/ITask";
 import { AntDesign, Entypo, Octicons, Feather } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StatusBall } from "../statusBall";
 import { useTask } from "@/hooks/task";
 import { DateData } from "react-native-calendars";
-import { AddTaskModal } from "../modal";
+import { TaskModal } from "../Taskmodal";
 
 export function Task({ id, isNew = false, title, description, status = "Incompleto", day, onNewTaskPress }: ITasks) {
     const { updateTaskStatus, removeTask } = useTask();
@@ -27,7 +27,7 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
         removeTask(id);
     }
 
-    const formatDate = (dates: DateData | null |undefined) => {
+    const formatDate = (dates: DateData | null | undefined) => {
         if (!dates) return "Nenhuma data selecionada";
         const { day, month, year } = dates;
         const formattedMonth = month < 10 ? `0${month}` : month;
@@ -77,12 +77,14 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
                         </Buttons>
                     </Content>
 
-                    <View>
-                        <Status>
-                            <DescriptionText>Status: {status} <StatusBall status={status} /></DescriptionText>
+                    <Info>
+                        <Status status={status}>
+                            <StatusText status={status}> {status} </StatusText><StatusBall status={status} />
                         </Status>
-                        <DescriptionText>Data de Expiração: {formatDate(day)}</DescriptionText>
-                    </View>
+                        <View>
+                            <DescriptionText>Data de Expiração: {formatDate(day)}</DescriptionText>
+                        </View>
+                    </Info>
                 </>
             ) : (
                 <AddTask onPress={onNewTaskPress}>
@@ -90,8 +92,7 @@ export function Task({ id, isNew = false, title, description, status = "Incomple
                 </AddTask>
             )}
 
-            {/* Modal de Edição */}
-            <AddTaskModal 
+            <TaskModal
                 titleModal="Editar Tarefa"
                 type="Edit"
                 visible={modalVisible}

@@ -12,6 +12,7 @@ export const Container = styled.View`
     width: 300px;
     padding: 20px;
     background-color: ${({ theme }: any) => theme.colors.black_900};
+    border: 1px solid ${({ theme }: any) => theme.colors.gray};
     border-radius: 10px;
 
     display: flex;
@@ -30,6 +31,10 @@ export const TextTitle = styled.Text`
     color: white;
     font-size: 24px;
     font-weight: bold;
+`;
+
+export const TextData = styled.Text`
+    color: white;
 `;
 
 export const TextGeneric = styled.Text`
@@ -51,4 +56,5 @@ export const ContentData  = styled.View`
     border-radius: 15px;
     padding: 12px;
     width: 100%;
+    
 `;

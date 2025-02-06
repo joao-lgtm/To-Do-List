@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-interface TabProps{
+interface TabProps {
   isActive: boolean;
 };
 
@@ -12,26 +12,37 @@ export const Container = styled.View`
 `;
 
 export const TabsContainer = styled.View`
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 16px;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 16px;
 `;
 
 export const TabButton = styled.TouchableOpacity`
-    flex: 1;
-    align-items: center;
+  align-items: center;
+  justify-content: space-between;
 `;
 
+export const TitleProject = styled.View`
+  align-items: center;
+  
+  margin-bottom: 20px;
+`;
+export const Title = styled.Text`
+  color: white;
+  font-size: 24px;
+  font-family: ${({ theme } : any) => theme.fonts.bold};
+
+`;
 export const ActiveTab = styled.View<TabProps>`
     padding: 8px 16px;
     border-radius: 20px;
-    background-color: ${({ isActive }: TabProps ) => (isActive ? "#6200ee" : "#DDD")};
+    background-color: ${({ isActive }: TabProps) => (isActive ? "#6200ee" : "#DDD")};
 `;
 
 export const TabText = styled.Text<TabProps>`
-    font-size: 16px;
-    color: ${({ isActive } : TabProps) => (isActive ? "white" : "#333")};
-    font-weight: ${({ isActive } : TabProps) => (isActive ? "bold" : "normal")};
+    font-size: 14px;
+    color: ${({ isActive }: TabProps) => (isActive ? "white" : "#333")};
+    font-weight: ${({ isActive }: TabProps) => (isActive ? "bold" : "normal")};
 `;
 
 

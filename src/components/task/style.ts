@@ -3,10 +3,10 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     display: flex;
     flex-direction: column;
-    border: 1px solid ${({ theme } : any) => theme.colors.gray};
+    border: 1px solid ${({ theme }: any) => theme.colors.gray};
     border-radius: 6px;
     gap: 15px;    
-    background-color:  ${({ theme } : any) => theme.colors.black_900};
+    background-color:  ${({ theme }: any) => theme.colors.black_900};
     padding: 12px;
     margin-bottom: 15px;
 `;
@@ -18,29 +18,64 @@ export const Content = styled.View`
     align-items: center;
 `;
 
-export const Description = styled.View`
+export const Info = styled.View `
+    flex: 1;
+    gap: 5px;
+`;
 
+export const Description = styled.View`
+    width: 200px;
 `;
 
 export const TitleText = styled.Text`
      color:rgb(163, 132, 28);
      font-size: 20px;
-     font-family: ${({ theme } : any) => theme.fonts.bold};
+     font-family: ${({ theme }: any) => theme.fonts.medium};
      text-transform: uppercase;
 `;
 
-export const Status = styled.View`
+export const Status = styled.View<{ status: string }>`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
+
+    border: 1px solid ${({ status , theme }: any) => 
+        status === "Completado" ? theme.colors.green_100 : 
+        status === "Pendente" ? theme.colors.orange_100 :
+        theme.colors.red_100};
+
+
+    background-color: ${({ status, theme }: any) => 
+        status === "Completado" ? theme.colors.green_200 : 
+        status === "Pendente" ? theme.colors.orange_200 :
+        theme.colors.red_200
+    };
+    border-radius: 5px;
+    padding: 3px;
+    width: 120px;
+
 `;
 
 
 export const DescriptionText = styled.Text`
-  color:${({ theme } : any) => theme.colors.white};
+  color:${({ theme }: any) => theme.colors.white};
   font-size: 14px;
-  font-family: ${({ theme } : any) => theme.fonts.bold};
-  width: 200px;
+  font-family: ${({ theme }: any) => theme.fonts.bold};
+  color:${({ theme }: any) => theme.colors.white} ;
+`;
+
+export const StatusText = styled.Text <{ status: string }>`
+  color:${({ theme }: any) => theme.colors.white};
+  font-size: 14px;
+  font-family: ${({ theme }: any) => theme.fonts.bold};
+  
+  color:${({ status, theme }: any) => 
+            status === "Completado" ? theme.colors.green_300 : 
+            status === "Pendente" ? theme.colors.orange_300 :
+            theme.colors.red_300
+        }
+    ;
 `;
 
 export const Buttons = styled.View`

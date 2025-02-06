@@ -2,10 +2,10 @@ import { Stack } from "expo-router";
 import { ThemeProvider } from "styled-components/native";
 import {
     useFonts,
-    Ubuntu_700Bold,
-    Ubuntu_500Medium,
-    Ubuntu_400Regular
-} from "@expo-google-fonts/ubuntu";
+    Poppins_700Bold,
+    Poppins_500Medium,
+    Poppins_400Regular
+} from "@expo-google-fonts/poppins";
 import { Loading } from "@/components/loading/styles";
 import { theme } from "@/styles/theme"; // Importando o tema
 import React from "react";
@@ -15,9 +15,9 @@ import { TaskProvider } from "@/hooks/task";
 
 export default function Layout() {
     const [fontsLoaded] = useFonts({
-        Ubuntu_700Bold,
-        Ubuntu_500Medium,
-        Ubuntu_400Regular
+        Poppins_700Bold,
+        Poppins_500Medium,
+        Poppins_400Regular
     });
 
     if (!fontsLoaded) {

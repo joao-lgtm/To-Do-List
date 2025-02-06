@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity } from "react-native";
-import { Background, Buttons, Container, ContentData, DataContainer, TextGeneric, TextTitle } from "./styles";
+import { Background, Buttons, Container, ContentData, DataContainer, TextData, TextGeneric, TextTitle } from "./styles";
 import { Input } from "../input";
 import { useTask } from "@/hooks/task";
 import { ITasks } from "@/types/ITask";
@@ -9,21 +9,16 @@ import { DateData } from "react-native-calendars";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import React from "react";
 import { theme } from "@/styles/theme";
+import { TaskModalProps } from "@/types/IModal";
 
-interface AddTaskModalProps {
-    titleModal: string;
-    visible: boolean;
-    onClose: () => void;
-    type: "Add" | "Edit";
-    task?: ITasks | null;
-}
-
-export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTaskModalProps) {
+export function TaskModal({ titleModal, visible, onClose, type, task }: TaskModalProps) {
     const { addTask, editTask } = useTask();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [calendarVisible, setCalendarVisible] = useState(false);
     const [day, setDay] = useState<DateData | null>(null);
+    const [titleError, setTitleError] = useState(false);
+    const [descriptionError, setDescriptionError] = useState(false);
 
     useEffect(() => {
         if (type === "Edit" && task) {
@@ -37,8 +32,27 @@ export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTa
         }
     }, [visible, task]);
 
+    const validateFields = () => {
+        let isValid = true;
+        if (!title.trim()) {
+            setTitleError(true);
+            isValid = false;
+        } else {
+            setTitleError(false);
+        }
+
+        if (!description.trim()) {
+            setDescriptionError(true);
+            isValid = false;
+        } else {
+            setDescriptionError(false);
+        }
+
+        return isValid;
+    };
+
     const handleAddTask = () => {
-        if (!title.trim() || !description.trim()) return;
+        if (!validateFields()) return;
 
         const newTask: ITasks = {
             id: Date.now(),
@@ -53,7 +67,7 @@ export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTa
     };
 
     const handleEditTask = () => {
-        if (!task || task.id == null) return;
+        if (!validateFields() || !task || task.id == null) return;
 
         editTask(task.id, title, description, day);
         onClose();
@@ -64,21 +78,24 @@ export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTa
             <Background>
                 <Container>
                     <TextTitle>{titleModal}</TextTitle>
+                    <View>
+                        <Input error={titleError}>
+                            <Input.Field
+                                placeholder="Digite o nome da tarefa"
+                                value={title}
+                                onChangeText={setTitle}
+                            />
+                            {titleError && <Text style={{ color: "red", fontSize: 12 }}>Este campo é obrigatório</Text>}
+                        </Input>
+                    </View>
 
-                    <Input>
-                        <Input.Field
-                            placeholder="Digite o nome da tarefa"
-                            value={title}
-                            onChangeText={setTitle}
-                        />
-                    </Input>
-
-                    <Input>
+                    <Input error={descriptionError}>
                         <Input.Field
                             placeholder="Digite a descrição da tarefa"
                             value={description}
                             onChangeText={setDescription}
                         />
+                        {descriptionError && <Text style={{ color: "red", fontSize: 12 }}>Este campo é obrigatório</Text>}
                     </Input>
 
                     <DataContainer>
@@ -87,8 +104,9 @@ export function AddTaskModal({ titleModal, visible, onClose, type, task }: AddTa
                                 {day ? (
                                     <ContentData>
                                         <TextGeneric>
-                                            Data Selecionada: {`${day.day}/${day.month}/${day.year}`}
-                                        </TextGeneric>
+                                            Data Selecionada:</TextGeneric>
+                                        <TextData> {`${day.day}/${day.month}/${day.year}`}</TextData>
+
                                         <AntDesign name="calendar" size={24} color={theme.colors.gray_800} />
                                     </ContentData>
                                 ) : (

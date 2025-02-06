@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, FlatList, Text, View } from "react-native";
 import { Task } from "@/components/task";
-import { AddTaskModal } from "@/components/modal";
+import { TaskModal } from "@/components/Taskmodal";
 import { useTask } from "@/hooks/task";
-import { ActiveTab, Container, TabButton, TabsContainer, TabText } from "./styles";
+import { ActiveTab, Container, TabButton, TabsContainer, TabText, Title, TitleProject } from "./styles";
 import React from "react";
 
 export default function Index() {
@@ -31,7 +31,9 @@ export default function Index() {
 
     return (
         <Container>
-            <Text>Todo List</Text>
+            <TitleProject>
+                <Title>Todo-Do-List</Title>
+            </TitleProject>
             <TabsContainer>
                 {tabs.map(({ name, total }) => (
                     <TabButton
@@ -62,9 +64,8 @@ export default function Index() {
                     <Task id={null} isNew onNewTaskPress={() => setModalVisible(true)} />
                 }
             />
-            <AddTaskModal titleModal={"Adicionar Nova Tarefa"} type={"Add"} visible={modalVisible} onClose={() => setModalVisible(false)} />
+            <TaskModal titleModal={"Adicionar Nova Tarefa"} type={"Add"} visible={modalVisible} onClose={() => setModalVisible(false)} />
         </Container>
     );
 }
 
- 
