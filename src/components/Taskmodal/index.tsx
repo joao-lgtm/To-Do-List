@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Modal, View, Text, TouchableOpacity } from "react-native";
-import { Background, Buttons, Container, ContentData, DataContainer, TextData, TextGeneric, TextTitle } from "./styles";
+import { Background, ButtonAdd, ButtonCancel, Buttons, Container, ContentData, DataContainer, TextAdd, TextCancel, TextData, TextGeneric, TextTitle } from "./styles";
 import { Input } from "../input";
 import { useTask } from "@/hooks/task";
 import { ITasks } from "@/types/ITask";
@@ -78,22 +78,22 @@ export function TaskModal({ titleModal, visible, onClose, type, task }: TaskModa
             <Background>
                 <Container>
                     <TextTitle>{titleModal}</TextTitle>
-                    <View>
-                        <Input error={titleError}>
-                            <Input.Field
-                                placeholder="Digite o nome da tarefa"
-                                value={title}
-                                onChangeText={setTitle}
-                            />
-                            {titleError && <Text style={{ color: "red", fontSize: 12 }}>Este campo é obrigatório</Text>}
-                        </Input>
-                    </View>
+                    <Input error={titleError}>
+                        <Input.Field
+                            placeholder="Digite o nome da tarefa"
+                            value={title}
+                            onChangeText={setTitle}
+                        />
+                        {titleError && <Text style={{ color: "red", fontSize: 12 }}>Este campo é obrigatório</Text>}
+                    </Input>
 
                     <Input error={descriptionError}>
                         <Input.Field
                             placeholder="Digite a descrição da tarefa"
                             value={description}
                             onChangeText={setDescription}
+                            multiline={true}
+                            numberOfLines={4}
                         />
                         {descriptionError && <Text style={{ color: "red", fontSize: 12 }}>Este campo é obrigatório</Text>}
                     </Input>
@@ -127,25 +127,16 @@ export function TaskModal({ titleModal, visible, onClose, type, task }: TaskModa
                     </DataContainer>
 
                     <Buttons>
-                        <TouchableOpacity onPress={onClose} style={{
-                            marginTop: 20,
-                            backgroundColor: "red",
-                            padding: 10,
-                            borderRadius: 5,
-                        }}>
-                            <Text style={{ color: "white" }}>Fechar</Text>
+                        <TouchableOpacity onPress={onClose}>
+                            <ButtonCancel>
+                                <TextCancel>Cancelar</TextCancel>
+                            </ButtonCancel>
                         </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={type === "Add" ? handleAddTask : handleEditTask}
-                            style={{
-                                marginTop: 20,
-                                backgroundColor: type === "Add" ? "green" : "blue",
-                                padding: 10,
-                                borderRadius: 5,
-                            }}
-                        >
-                            <Text style={{ color: "white" }}>{type === "Add" ? "Adicionar" : "Salvar"}</Text>
+                        <TouchableOpacity onPress={type === "Add" ? handleAddTask : handleEditTask}>
+                            <ButtonAdd>
+                                <TextAdd>{type === "Add" ? "Adicionar" : "Salvar"}</TextAdd>
+                            </ButtonAdd>
                         </TouchableOpacity>
                     </Buttons>
                 </Container>

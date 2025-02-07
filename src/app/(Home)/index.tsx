@@ -32,7 +32,7 @@ export default function Index() {
     return (
         <Container>
             <TitleProject>
-                <Title>Todo-Do-List</Title>
+                <Title>To-Do-List</Title>
             </TitleProject>
             <TabsContainer>
                 {tabs.map(({ name, total }) => (

@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const Content = styled.TextInput.attrs((props: any) => ({
-    placeholderTextColor: props.theme.colors.gray_800 // Cor do texto do placeholder
+    placeholderTextColor: props.theme.colors.gray_800
 }))`
     color: white;
 `;

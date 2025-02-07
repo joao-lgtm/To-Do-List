@@ -8,12 +8,12 @@ import { useTask } from "@/hooks/task";
 import { DateData } from "react-native-calendars";
 import { TaskModal } from "../Taskmodal";
 
-export function Task({ id, isNew = false, title, description, status = "Incompleto", day, onNewTaskPress }: ITasks) {
+export function Task({ id, isNew = false, title, description, status = "Pendente", day, onNewTaskPress }: ITasks) {
     const { updateTaskStatus, removeTask } = useTask();
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedTask, setSelectedTask] = useState<ITasks | null>(null);
 
-    async function handleUpdateStatus(newStatus: "Pendente" | "Completado" | "Incompleto") {
+    async function handleUpdateStatus(newStatus: "Pendente" | "Completado") {
         if (id === null) {
             return;
         }

@@ -7,7 +7,7 @@ import {
     Poppins_400Regular
 } from "@expo-google-fonts/poppins";
 import { Loading } from "@/components/loading/styles";
-import { theme } from "@/styles/theme"; // Importando o tema
+import { theme } from "@/styles/theme";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";

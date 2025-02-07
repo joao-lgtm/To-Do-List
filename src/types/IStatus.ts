@@ -1,3 +1,3 @@
 export interface IStatus {
-    status: "Pendente" | "Completado" | "Incompleto"
+    status: "Pendente" | "Completado"
 }

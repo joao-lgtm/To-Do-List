@@ -41,9 +41,6 @@ export const TextGeneric = styled.Text`
     color: ${({ theme } : any) => theme.colors.gray_800};
 `;
 
-export const DataContainer = styled.View`
-    width: 100%;
-`;
 
 export const ContentData  = styled.View`
     display: flex;
@@ -57,4 +54,33 @@ export const ContentData  = styled.View`
     padding: 12px;
     width: 100%;
     
+`;
+
+export const DataContainer = styled.View`
+    width: 100%;
+`;
+
+
+export const ButtonCancel = styled.View`
+    border-radius: 15px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    
+    border: 1px solid ${({ theme }: any) =>  theme.colors.red_100};
+`;
+
+export const TextCancel = styled.Text`
+    color: ${({ theme }: any) =>  theme.colors.red};
+`;
+
+export const ButtonAdd = styled.View`
+    border-radius: 15px;
+    padding: 12px 20px;
+    margin-top: 10px;
+    
+    border: 1px solid ${({ theme }: any) =>  theme.colors.green_100};
+`;
+
+export const TextAdd = styled.Text`
+    color: ${({ theme }: any) =>  theme.colors.green_100};
 `;

@@ -1,6 +1,6 @@
 import { Modal, TouchableOpacity, View } from "react-native";
 import { Calendar, DateData, LocaleConfig } from "react-native-calendars";
-import { Background, Buttons, Container, styles } from "./styles";
+import { Background, ButtonAdd, ButtonCancel, Buttons, Container, styles, TextAdd, TextCancel } from "./styles";
 import { useState } from "react";
 import { ptBR } from "@/utils/localeCalendarConfig";
 import { Text } from "react-native";
@@ -46,6 +46,7 @@ export function Calendars({ calendarVisible, onClose, day, setDay }: CalendarsPr
                             arrowColor: "#F06543",
                             calendarBackground: "#FFF",
                         }}
+                        hideExtraDays={true}
                         minDate={new Date().toISOString().split('T')[0]}
                         onDayPress={(day: DateData) => setDay(day)}
                         markedDates={day ? {
@@ -54,22 +55,16 @@ export function Calendars({ calendarVisible, onClose, day, setDay }: CalendarsPr
                     />
 
                     <Buttons>
-                        <TouchableOpacity onPress={onClose} style={{
-                            marginTop: 20,
-                            backgroundColor: "red",
-                            padding: 10,
-                            borderRadius: 5,
-                        }}>
-                            <Text style={{ color: "white" }}>Fechar</Text>
+                        <TouchableOpacity onPress={onClose}>
+                            <ButtonCancel>
+                                <TextCancel>Fechar</TextCancel>
+                            </ButtonCancel>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={handleAddDay} style={{
-                            marginTop: 20,
-                            backgroundColor: "green",
-                            padding: 10,
-                            borderRadius: 5,
-                        }}>
-                            <Text style={{ color: "white" }}>Adicionar</Text>
+                        <TouchableOpacity onPress={handleAddDay}>
+                            <ButtonAdd>
+                                <TextAdd>Adicionar</TextAdd>
+                            </ButtonAdd>
                         </TouchableOpacity>
                     </Buttons>
                 </Container>

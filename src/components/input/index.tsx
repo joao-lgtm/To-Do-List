@@ -2,12 +2,17 @@ import { ViewProps, TextInputProps } from "react-native";
 import { Container, Content } from "./styles";
 import React from "react";
 
-function Input({ children, error }: { children: React.ReactNode, error?: boolean }) {
+interface InputProps {
+  children: React.ReactNode;
+  error?: boolean;
+}
+
+function Input({ children, error }: InputProps) {
     return (
         <Container error={error}>
             {React.Children.map(children, (child) => {
-                if (React.isValidElement(child)) {
-                    return React.cloneElement(child, { error });
+                if (React.isValidElement(child) && "props" in child) {
+                    return React.cloneElement(child as React.ReactElement<any>, { error });
                 }
                 return child;
             })}
@@ -15,13 +20,12 @@ function Input({ children, error }: { children: React.ReactNode, error?: boolean
     );
 }
 
-function Field({ error, ...rest }: TextInputProps & { error?: boolean }) {
-    return (
-        <Content
-            {...rest}
-            error={error}
-        />
-    );
+interface FieldProps extends TextInputProps {
+  error?: boolean;
+}
+
+function Field({ error, ...rest }: FieldProps) {
+    return <Content {...rest} error={error} />;
 }
 
 Input.Field = Field;

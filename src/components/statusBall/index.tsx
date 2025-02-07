@@ -11,9 +11,6 @@ export function StatusBall({ status } : IStatus) {
         case "Completado":
             statusCode = 2;
             break;
-        case "Incompleto":
-            statusCode = 1;
-            break;
     }
 
     return <Container status={statusCode} />;

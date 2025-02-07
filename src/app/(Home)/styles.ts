@@ -36,7 +36,7 @@ export const Title = styled.Text`
 export const ActiveTab = styled.View<TabProps>`
     padding: 8px 16px;
     border-radius: 20px;
-    background-color: ${({ isActive }: TabProps) => (isActive ? "#6200ee" : "#DDD")};
+    background-color: ${({ isActive }: TabProps) => (isActive ? "#4442F0" : "#DDD")};
 `;
 
 export const TabText = styled.Text<TabProps>`
