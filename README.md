@@ -1,54 +1,66 @@
-<<<<<<< HEAD
-# To-Do-List
-=======
-# Welcome to your Expo app 👋
+<h1 align="center" id="title">To Do List</h1>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
+<p align="center"><img src="https://socialify.git.ci/joao-lgtm/To-Do-List/image?font=Raleway&language=1&name=1&owner=1&pattern=Formal+Invitation&stargazers=1&theme=Dark" alt="project-image"></p>
 
-1. Install dependencies
+<p id="description">Este projeto foi desenvolvido com React Native e consiste em um aplicativo de lista de tarefas (To-Do List) que permite aos usuários adicionar, editar, atualizar e excluir tarefas. O objetivo é oferecer uma experiência intuitiva e eficiente, com um layout responsivo para diferentes dispositivos.</p>
 
-   ```bash
-   npm install
-   ```
+<p align="center"><img src="https://img.shields.io/badge/Node-v22.13.1-blue" alt="shields"><img src="https://img.shields.io/badge/NPM-v8.15.0-green" alt="shields"></p>
 
-2. Start the app
+<p>online em <a href="https://dapper-phoenix-9bf0cb.netlify.app">Food Explorer</a></p>
 
-   ```bash
-    npx expo start
-   ```
+ <h2>Project Screenshots:</h2>
 
-In the output, you'll find options to open the app in a
+<p align="center"><img src="https://cdn.discordapp.com/attachments/1037719224107405415/1337246849329004604/image0.jpg?ex=67a6bfad&is=67a56e2d&hm=64274c63617bd2ea289acde470e4dad2da1a43e8d6ea27e3e2efc54d46bf641c&" alt="project-screenshot" width="250" height="450/"></p>
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+🚨 IMPORTANTE 🚨
+Este projeto foi desenvolvido utilizando o Expo, então certifique-se de ter o expo instalado, caso não possua, execute o comando abaixo:
 
-When you're ready, run:
 
-```bash
-npm run reset-project
+```
+npm install --global expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+<h2>🛠️ Installation Steps:</h2>
 
-To learn more about developing your project with Expo, look at the following resources:
+<p>1. Clone the repository:</p>
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+git clone < repository-url >
+```
 
-## Join the community
+<p>2. Navigate to the project directory:</p>
 
-Join our community of developers creating universal apps.
+```
+cd < project-directory >
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
->>>>>>> 7c429c7 (Primeiro commit)
+<p>3. Install dependencies:</p>
+
+```
+yarn || npm install
+```
+
+<p>4. Usage</p>
+
+```
+yarn start || npm start
+```
+
+<h2>Deploy</h2>
+
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   React native
+*   Javascript
+*   Styled-components
+
+<h2>🛡️ License:</h2>
+
+This project is licensed under the Esse projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
