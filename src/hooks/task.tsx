@@ -26,7 +26,7 @@ export function TaskProvider({ children }: ITaskProviderProps) {
                 id: task.id,
                 title: task.title,
                 description: "Descrição genérica",
-                status: task.completed ? "Completado" : "Pendente",
+                status: task.completed ? "Completo" : "Pendente",
                 day: null,
             }));
 
@@ -78,7 +78,7 @@ export function TaskProvider({ children }: ITaskProviderProps) {
         await saveTasksToStorage(updatedTasks);
     }
 
-    async function updateTaskStatus(taskId: number, newStatus: "Pendente" | "Completado") {
+    async function updateTaskStatus(taskId: number, newStatus: "Pendente" | "Completo") {
         const updatedTasks = task.map(t =>
             t.id === taskId ? { ...t, status: newStatus } : t
         );

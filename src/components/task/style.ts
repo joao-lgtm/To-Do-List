@@ -41,13 +41,13 @@ export const Status = styled.View<{ status: string }>`
     justify-content: space-around;
 
     border: 1px solid ${({ status , theme }: any) => 
-        status === "Completado" ? theme.colors.green_100 : 
+        status === "Completo" ? theme.colors.green_100 : 
         status === "Pendente" ? theme.colors.orange_100 :
         theme.colors.red_100};
 
 
     background-color: ${({ status, theme }: any) => 
-        status === "Completado" ? theme.colors.green_200 : 
+        status === "Completo" ? theme.colors.green_200 : 
         status === "Pendente" ? theme.colors.orange_200 :
         theme.colors.red_200
     };
@@ -71,7 +71,7 @@ export const StatusText = styled.Text <{ status: string }>`
   font-family: ${({ theme }: any) => theme.fonts.bold};
   
   color:${({ status, theme }: any) => 
-            status === "Completado" ? theme.colors.green_300 : 
+            status === "Completo" ? theme.colors.green_300 : 
             status === "Pendente" ? theme.colors.orange_300 :
             theme.colors.red_300
         }

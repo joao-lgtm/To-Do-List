@@ -5,7 +5,7 @@ export interface ITasks{
     isNew?: boolean;
     title?: string;
     description?: string;
-    status?: "Pendente" | "Completado";
+    status?: "Pendente" | "Completo";
     day?: DateData | null ;
     onNewTaskPress?: () => void;
 }

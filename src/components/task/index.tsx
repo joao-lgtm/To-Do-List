@@ -13,7 +13,7 @@ export function Task({ id, isNew = false, title, description, status = "Pendente
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedTask, setSelectedTask] = useState<ITasks | null>(null);
 
-    async function handleUpdateStatus(newStatus: "Pendente" | "Completado") {
+    async function handleUpdateStatus(newStatus: "Pendente" | "Completo") {
         if (id === null) {
             return;
         }
@@ -45,9 +45,9 @@ export function Task({ id, isNew = false, title, description, status = "Pendente
                             <DescriptionText>{description}</DescriptionText>
                         </Description>
                         <Buttons>
-                            {status !== "Completado" && (
+                            {status !== "Completo" && (
                                 <>
-                                    <TouchableOpacity onPress={() => handleUpdateStatus("Completado")}>
+                                    <TouchableOpacity onPress={() => handleUpdateStatus("Completo")}>
                                         <ConfirmButton>
                                             <AntDesign name="check" size={20} color="green" />
                                         </ConfirmButton>
@@ -82,7 +82,7 @@ export function Task({ id, isNew = false, title, description, status = "Pendente
                             <StatusText status={status}> {status} </StatusText><StatusBall status={status} />
                         </Status>
                         <View>
-                            <DescriptionText>Data de Expiração: {formatDate(day)}</DescriptionText>
+                            <DescriptionText>Finalizar até: {formatDate(day)}</DescriptionText>
                         </View>
                     </Info>
                 </>

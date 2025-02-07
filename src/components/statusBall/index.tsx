@@ -8,7 +8,7 @@ export function StatusBall({ status } : IStatus) {
         case "Pendente":
             statusCode = 0;
             break;
-        case "Completado":
+        case "Completo":
             statusCode = 2;
             break;
     }

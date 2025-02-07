@@ -6,25 +6,25 @@ import { useTask } from "@/hooks/task";
 import { ActiveTab, Container, TabButton, TabsContainer, TabText, Title, TitleProject } from "./styles";
 import React from "react";
 
-export default function Index() {
+export default function Home() {
     const [modalVisible, setModalVisible] = useState(false);
     const [activeTab, setActiveTab] = useState<"Todos" | "Pendente" | "Completos">("Todos");
     const { task } = useTask();
 
     const filteredTasks = task?.filter((t) => {
         if (activeTab === "Pendente") return t.status === "Pendente";
-        if (activeTab === "Completos") return t.status === "Completado";
+        if (activeTab === "Completos") return t.status === "Completo";
         return true;
     });
 
     const totalTodos = task.length;
     const totalPendente = task.filter(t => t.status === "Pendente").length;
-    const totalCompletado = task.filter(t => t.status === "Completado").length;
+    const totalCompletado = task.filter(t => t.status === "Completo").length;
 
     const tabs = [
         { name: "Todos", total: totalTodos },
         { name: "Pendente", total: totalPendente },
-        { name: "Completos", total: totalCompletado },
+        { name: "Completo", total: totalCompletado },
     ];
 
 
